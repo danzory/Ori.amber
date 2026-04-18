@@ -1,1 +1,462 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>דוח התקדמות - אורי אמבר</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Assistant', sans-serif;
+            overflow-x: hidden;
+            background-color: #f3f4f6;
+        }
+        .tab-active {
+            color: #2563eb;
+            border-bottom: 2px solid #2563eb;
+        }
+        /* Mobile Scrollbar hiding */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .locked-overlay {
+            background: repeating-linear-gradient(
+                45deg,
+                #f8fafc,
+                #f8fafc 10px,
+                #f1f5f9 10px,
+                #f1f5f9 20px
+            );
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="container relative mx-auto p-4 sm:p-6 lg:p-8 bg-white sm:rounded-2xl shadow-none sm:shadow-2xl my-0 sm:my-8 min-h-screen sm:min-h-0">
+        <header class="relative text-center mb-8 pt-4 sm:pt-8">
+            <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mt-2 sm:mt-0">דוח התקדמות</h1>
+            <p class="text-lg text-gray-600 mt-2 font-bold">אורי אמבר</p>
+            <!-- Logo SVG -->
+            <div class="flex justify-center mt-6 mb-2">
+                <svg class="h-10 w-auto sm:h-16" viewBox="0 0 120 50" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="#2d3748">
+                        <rect x="18" y="6" width="8" height="38" rx="2"/>
+                        <rect x="10" y="9" width="8" height="32" rx="2"/>
+                        <rect x="2" y="12" width="8" height="26" rx="2"/>
+                    </g>
+                    <rect x="26" y="18" width="6" height="14" rx="2" fill="#a0aec0"/>
+                    <g fill="#2d3748">
+                        <rect x="94" y="6" width="8" height="38" rx="2"/>
+                        <rect x="102" y="9" width="8" height="32" rx="2"/>
+                        <rect x="110" y="12" width="8" height="26" rx="2"/>
+                    </g>
+                    <rect x="88" y="18" width="6" height="14" rx="2" fill="#a0aec0"/>
+                    <path d="M 32 25 L 50 25 L 53 28 L 58 10 L 63 45 L 66 25 L 88 25" stroke="#ef4444" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+                </svg>
+            </div>
+        </header>
+
+        <main>
+            <!-- Tab Navigation -->
+            <div class="mb-8 flex justify-start sm:justify-center border-b border-gray-300 overflow-x-auto no-scrollbar pb-1">
+                <button id="progressTab" class="py-3 px-4 sm:px-6 font-semibold tab-active whitespace-nowrap">דוח התקדמות</button>
+                <button id="trainingTab" class="py-3 px-4 sm:px-6 font-semibold text-gray-400 hover:text-gray-600 whitespace-nowrap flex items-center gap-2">
+                    <i data-lucide="lock" class="w-4 h-4"></i> תוכנית אימונים
+                </button>
+                <button id="nutritionTab" class="py-3 px-4 sm:px-6 font-semibold text-gray-400 hover:text-gray-600 whitespace-nowrap flex items-center gap-2">
+                    <i data-lucide="lock" class="w-4 h-4"></i> תפריט תזונה
+                </button>
+                <button id="homeworkTab" class="py-3 px-4 sm:px-6 font-semibold text-gray-400 hover:text-gray-600 whitespace-nowrap flex items-center gap-2">
+                    <i data-lucide="lock" class="w-4 h-4"></i> שיעורי בית
+                </button>
+            </div>
+
+            <!-- Content Panes -->
+            <div id="contentPanes">
+                <!-- Progress Report Pane -->
+                <div id="progressContent">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-12">
+                        <div class="bg-white rounded-xl shadow-md p-6 flex flex-col items-center justify-center text-center transition hover:shadow-lg hover:-translate-y-1">
+                            <h3 class="text-lg font-semibold text-gray-500 mb-2">תאריך התחלה</h3>
+                            <p class="text-3xl font-bold text-blue-600">אוגוסט 2026</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-md p-6 flex flex-col items-center justify-center text-center transition hover:shadow-lg hover:-translate-y-1">
+                            <h3 class="text-lg font-semibold text-gray-500 mb-2">סטטוס התקדמות</h3>
+                            <p class="text-3xl font-bold text-green-500">אימון שני הושלם! נשברו שיאים 🚀</p>
+                        </div>
+                    </div>
+
+                     <div class="bg-indigo-100 border-r-4 border-indigo-500 text-indigo-800 p-4 rounded-lg shadow-md my-8" role="alert">
+                        <p class="font-bold">עדכון (18/04):</p>
+                        <p>אימון שני בוצע בהצלחה! שבירת שיאים מטורפת בהאק סקוואט, לחיצות חזה ופולי עליון. תרגילים חדשים התווספו למעקב. ממשיכים בכל הכוח!</p>
+                    </div>
+
+                    <!-- User Details -->
+                    <div class="mb-12 bg-white p-6 rounded-xl shadow-md">
+                        <h2 class="text-3xl font-bold text-center mb-6 text-gray-900">פרטים אישיים</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h3 class="text-lg font-semibold text-gray-500 mb-2">גיל</h3>
+                                <p class="text-xl font-bold text-gray-800">22</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h3 class="text-lg font-semibold text-gray-500 mb-2">משקל (04/08/2026)</h3>
+                                <p class="text-xl font-bold text-gray-800">81 ק"ג</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h3 class="text-lg font-semibold text-gray-500 mb-2">מטרת על</h3>
+                                <p class="text-xl font-bold text-gray-800">בבנייה...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold text-center mb-6 text-gray-900">מעקב מדדים מרכזיים</h2>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <!-- Bench Press Smith Card -->
+                            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500">
+                                <h3 class="text-xl font-bold text-gray-900 mb-4">לחיצת חזה (סמית')</h3>
+                                <div class="flex justify-between items-center mb-4 text-blue-600">
+                                    <span class="font-bold">משקל עבודה נוכחי</span>
+                                    <span class="font-bold text-lg">17.5 ק"ג x 6 <span class="text-xs text-gray-500">(כל צד)</span></span>
+                                </div>
+                                <div class="w-full h-40">
+                                    <canvas id="miniChart-smithBench"></canvas>
+                                </div>
+                            </div>
+                            <!-- Hack Squat Card -->
+                            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500">
+                                <h3 class="text-xl font-bold text-gray-900 mb-4">האק סקוואט</h3>
+                                <div class="flex justify-between items-center mb-4 text-blue-600">
+                                    <span class="font-bold">משקל עבודה נוכחי</span>
+                                    <span class="font-bold text-lg">60 ק"ג x 6</span>
+                                </div>
+                                <div class="w-full h-40">
+                                    <canvas id="miniChart-hackSquat"></canvas>
+                                </div>
+                            </div>
+                            <!-- Machine Pulldown Card -->
+                            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500">
+                                <h3 class="text-xl font-bold text-gray-900 mb-4">פולי עליון (מכונה)</h3>
+                                <div class="flex justify-between items-center mb-4 text-blue-600">
+                                    <span class="font-bold">משקל עבודה נוכחי</span>
+                                    <span class="font-bold text-lg">32.5 ק"ג x 6 <span class="text-xs text-gray-500">(כל צד)</span></span>
+                                </div>
+                                <div class="w-full h-40">
+                                    <canvas id="miniChart-machinePulldown"></canvas>
+                                </div>
+                            </div>
+                            <!-- Wide Row Card -->
+                            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500">
+                                <h3 class="text-xl font-bold text-gray-900 mb-4">חתירה רחבה</h3>
+                                <div class="flex justify-between items-center mb-4 text-blue-600">
+                                    <span class="font-bold">משקל עבודה נוכחי</span>
+                                    <span class="font-bold text-lg">22.5 ק"ג x 9 <span class="text-xs text-gray-500">(כל צד)</span></span>
+                                </div>
+                                <div class="w-full h-40">
+                                    <canvas id="miniChart-wideRow"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                        <h2 class="text-2xl font-bold text-center my-4 text-gray-900">מעקב תרגילים מלא (סרגל מתקפל)</h2>
+                        <div class="p-4 sm:p-6" id="recordsAccordionContainer">
+                            <!-- JS will populate accordions here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Training Plan Pane (Locked) -->
+                <div id="trainingContent" class="hidden">
+                    <div class="p-12 text-center bg-white rounded-xl shadow-md locked-overlay border border-gray-200">
+                        <div class="flex justify-center mb-4">
+                            <i data-lucide="lock" class="w-16 h-16 text-gray-400"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-800 mb-2">תוכנית אימונים</h2>
+                        <p class="text-gray-500 text-lg">התוכנית נמצאת כרגע בבנייה. היא תעודכן כאן בהמשך!</p>
+                    </div>
+                </div>
+
+                <!-- Nutrition Pane (Locked) -->
+                <div id="nutritionContent" class="hidden">
+                    <div class="p-12 text-center bg-white rounded-xl shadow-md locked-overlay border border-gray-200">
+                        <div class="flex justify-center mb-4">
+                            <i data-lucide="lock" class="w-16 h-16 text-gray-400"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-800 mb-2">תפריט תזונה</h2>
+                        <p class="text-gray-500 text-lg">התפריט נמצא כרגע בבנייה. הוא יעודכן כאן בהמשך!</p>
+                    </div>
+                </div>
+
+                <!-- Homework Pane (Locked) -->
+                <div id="homeworkContent" class="hidden">
+                     <div class="p-12 text-center bg-white rounded-xl shadow-md locked-overlay border border-gray-200">
+                        <div class="flex justify-center mb-4">
+                            <i data-lucide="lock" class="w-16 h-16 text-gray-400"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-800 mb-2">שיעורי בית</h2>
+                        <p class="text-gray-500 text-lg">אין משימות פתוחות כרגע.</p>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+        
+        <footer class="text-center mt-10 text-sm text-gray-500 pb-6">
+            <p>© ARMOR BUILDER - Ori Ambar</p>
+        </footer>
+    </div>
+    
+    <script>
+        const exerciseNames = {
+            smithBenchPress: 'לחיצת חזה (סמית\')',
+            smithBehindNeckPress: 'לחיצת כתפיים (סמית\', מאחורי הראש)',
+            machinePulldown: 'פולי עליון (מכונה)',
+            assistedDips: 'מקבילים (מכונה/גרביטון)',
+            seatedLateralRaises: 'הרחקות כתפיים בישיבה',
+            wideRow: 'חתירה רחבה',
+            lyingLegCurl: 'כפיפת ברכיים (שכיבה)',
+            hackSquat: 'האק סקוואט',
+            standingBicepCurl: 'כפיפת מרפקים בעמידה',
+            inclineCrunches: 'כפיפות בטן בשיפוע'
+        };
+
+        const rawProgressData = {
+            smithBenchPress: [
+                { weight: 15, reps: 6, date: "04/08/2026", note: "כל צד" },
+                { weight: 17.5, reps: 6, date: "18/04/2026", note: "כל צד" }
+            ],
+            smithBehindNeckPress: [
+                { weight: 8.75, reps: 6, date: "18/04/2026", note: "כל צד" }
+            ],
+            machinePulldown: [
+                { weight: 30, reps: 6, date: "04/08/2026", note: "כל צד" },
+                { weight: 32.5, reps: 6, date: "18/04/2026", note: "כל צד" }
+            ],
+            assistedDips: [
+                { weight: -42, reps: 5, date: "18/04/2026" }
+            ],
+            seatedLateralRaises: [
+                { weight: 5, reps: 8, date: "04/08/2026" }
+            ],
+            wideRow: [
+                { weight: 25, reps: 6, date: "04/08/2026", note: "כל צד" },
+                { weight: 22.5, reps: 9, date: "18/04/2026", note: "כל צד" }
+            ],
+            lyingLegCurl: [
+                { weight: "7 פלטות", reps: 8, date: "04/08/2026" },
+                { weight: "8 פלטות", reps: 9, date: "18/04/2026" }
+            ],
+            hackSquat: [
+                { weight: 50, reps: 8, date: "04/08/2026" },
+                { weight: 60, reps: 6, date: "18/04/2026" }
+            ],
+            standingBicepCurl: [
+                { weight: 15, reps: 8, date: "04/08/2026" }
+            ],
+            inclineCrunches: [
+                { weight: "משקל גוף", reps: 5, date: "04/08/2026" },
+                { weight: "משקל גוף", reps: 10, date: "18/04/2026" }
+            ]
+        };
+        
+        const progressData = {};
+        for (const exerciseKey in rawProgressData) {
+            progressData[exerciseKey] = rawProgressData[exerciseKey].map(dataPoint => {
+                return { ...dataPoint };
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+
+            window.toggleAccordion = function(id) {
+                const el = document.getElementById(id);
+                const icon = document.getElementById('icon-' + id);
+                if (el.classList.contains('hidden')) {
+                    el.classList.remove('hidden');
+                    icon.classList.add('rotate-180');
+                } else {
+                    el.classList.add('hidden');
+                    icon.classList.remove('rotate-180');
+                }
+            };
+
+            function renderRecordsAccordion() {
+                const container = document.getElementById('recordsAccordionContainer');
+                if (!container) return;
+                container.innerHTML = ''; 
+
+                for (const [key, name] of Object.entries(exerciseNames)) {
+                    const history = progressData[key];
+                    if (!history || history.length === 0) continue;
+
+                    const first = history[0];
+                    const last = history[history.length - 1];
+                    const accordionId = `acc-${key}`;
+
+                    let historyHtml = '';
+                    history.forEach((record, index) => {
+                        const dateText = record.date ? `<span class="text-indigo-500 font-semibold">${record.date}</span>` : `<span class="text-gray-400">אימון ${index + 1}</span>`;
+                        const isLatest = index === history.length - 1;
+                        
+                        // Handle cases where weight might be a string (like "7 פלטות")
+                        let weightDisplay = record.weight;
+                        if (typeof record.weight === 'number' && record.weight !== 0) {
+                            weightDisplay = `${record.weight} ק"ג`;
+                        } else if (record.weight === 0) {
+                             weightDisplay = '-';
+                        }
+
+                        const repsStr = record.reps === 0 ? '-' : `x ${record.reps}`;
+
+                        historyHtml += `
+                            <li class="flex justify-between items-center py-2 ${index !== history.length - 1 ? 'border-b border-gray-100' : ''} ${isLatest ? 'bg-indigo-50 px-3 rounded-md font-bold' : 'px-3'}">
+                                ${dateText}
+                                <span class="${isLatest ? 'text-indigo-700' : 'text-gray-700'}">${weightDisplay} ${repsStr} ${record.note ? `(${record.note})` : ''}</span>
+                            </li>
+                        `;
+                    });
+
+                    let firstWeightDisplay = first.weight;
+                    if (typeof first.weight === 'number' && first.weight !== 0) firstWeightDisplay = `${first.weight} ק"ג`;
+                    else if (first.weight === 0) firstWeightDisplay = '-';
+                    const firstRepsStr = first.reps === 0 ? '-' : `x ${first.reps}`;
+
+                    let lastWeightDisplay = last.weight;
+                    if (typeof last.weight === 'number' && last.weight !== 0) lastWeightDisplay = `${last.weight} ק"ג`;
+                    else if (last.weight === 0) lastWeightDisplay = '-';
+                    const lastRepsStr = last.reps === 0 ? '-' : `x ${last.reps}`;
+
+                    const html = `
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-3">
+                        <button class="w-full px-4 sm:px-6 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center bg-gray-50 hover:bg-gray-100 transition-colors focus:outline-none gap-2 sm:gap-4" onclick="toggleAccordion('${accordionId}')">
+                            <div class="flex items-center gap-3 w-full sm:w-1/3 text-right">
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 transform transition-transform duration-200" id="icon-${accordionId}"></i>
+                                <span class="font-bold text-lg text-gray-900">${name}</span>
+                            </div>
+                            <div class="w-full sm:w-1/3 text-right sm:text-center text-sm text-gray-500">
+                                אימון ראשון: <span class="font-semibold text-gray-700">${firstWeightDisplay} ${firstRepsStr}</span>
+                            </div>
+                            <div class="w-full sm:w-1/3 text-right sm:text-left text-sm font-bold text-indigo-600">
+                                עדכני: <span class="text-lg">${lastWeightDisplay} ${lastRepsStr}</span>
+                            </div>
+                        </button>
+                        <div id="${accordionId}" class="hidden px-4 sm:px-6 py-4 border-t border-gray-200 bg-white">
+                            <ul class="space-y-1">
+                                ${historyHtml}
+                            </ul>
+                        </div>
+                    </div>
+                    `;
+                    container.innerHTML += html;
+                }
+                lucide.createIcons();
+            }
+
+            renderRecordsAccordion();
+            
+            const createMiniChart = (canvasId, exerciseKey) => {
+                const ctx = document.getElementById(canvasId);
+                if (!ctx) return;
+                
+                const data = progressData[exerciseKey];
+                if (!data || data.length === 0) return;
+
+                // Filter out non-numeric weights for the chart (like "7 פלטות")
+                const chartData = data.filter(d => typeof d.weight === 'number');
+                if(chartData.length === 0) return;
+
+                new Chart(ctx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: chartData.map((d, i) => `אימון ${i + 1}`),
+                        datasets: [{
+                            label: 'משקל (ק"ג)',
+                            data: chartData.map(d => d.weight),
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 2,
+                            tension: 0.2,
+                            fill: true,
+                            pointRadius: 4,
+                            pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false }, tooltip: { enabled: true } },
+                        scales: {
+                            y: { 
+                                beginAtZero: false, 
+                                display: true, 
+                                ticks: { font: { size: 10 }, maxTicksLimit: 5 },
+                                suggestedMin: chartData[0].weight - 5,
+                                suggestedMax: chartData[0].weight + 5
+                            },
+                            x: { display: true, ticks: { font: { size: 10 } } }
+                        }
+                    }
+                });
+            };
+
+            createMiniChart('miniChart-smithBench', 'smithBenchPress');
+            createMiniChart('miniChart-hackSquat', 'hackSquat');
+            createMiniChart('miniChart-machinePulldown', 'machinePulldown');
+            createMiniChart('miniChart-wideRow', 'wideRow');
+            
+            // Tab Switching Logic
+            const progressTab = document.getElementById('progressTab');
+            const trainingTab = document.getElementById('trainingTab');
+            const nutritionTab = document.getElementById('nutritionTab');
+            const homeworkTab = document.getElementById('homeworkTab');
+            
+            const progressContent = document.getElementById('progressContent');
+            const trainingContent = document.getElementById('trainingContent');
+            const nutritionContent = document.getElementById('nutritionContent');
+            const homeworkContent = document.getElementById('homeworkContent');
+
+            const allTabs = [progressTab, trainingTab, nutritionTab, homeworkTab];
+            const allContentPanes = [progressContent, trainingContent, nutritionContent, homeworkContent];
+
+            function switchTab(activeTab, activeContent) {
+                allTabs.forEach(tab => {
+                    if (tab) {
+                        tab.classList.remove('tab-active');
+                        tab.classList.add('text-gray-400');
+                    }
+                });
+                if (activeTab) {
+                    activeTab.classList.add('tab-active');
+                    activeTab.classList.remove('text-gray-400');
+                }
+
+                allContentPanes.forEach(pane => {
+                    if (pane) pane.classList.add('hidden');
+                });
+                if (activeContent) activeContent.classList.remove('hidden');
+            }
+
+            if(progressTab) progressTab.addEventListener('click', () => switchTab(progressTab, progressContent));
+            if(trainingTab) trainingTab.addEventListener('click', () => switchTab(trainingTab, trainingContent));
+            if(nutritionTab) nutritionTab.addEventListener('click', () => switchTab(nutritionTab, nutritionContent));
+            if(homeworkTab) homeworkTab.addEventListener('click', () => switchTab(homeworkTab, homeworkContent));
+        });
+    </script>
+</body>
+</html>
+
+
+```
 
