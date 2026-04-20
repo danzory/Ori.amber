@@ -90,13 +90,13 @@
                         </div>
                         <div class="bg-white rounded-xl shadow-md p-6 flex flex-col items-center justify-center text-center transition hover:shadow-lg hover:-translate-y-1">
                             <h3 class="text-lg font-semibold text-gray-500 mb-2">סטטוס התקדמות</h3>
-                            <p class="text-3xl font-bold text-green-500">אימון שני הושלם! נשברו שיאים 🚀</p>
+                            <p class="text-3xl font-bold text-green-500">אימון חמישי הושלם! נשברו שיאים 🚀</p>
                         </div>
                     </div>
 
                      <div class="bg-indigo-100 border-r-4 border-indigo-500 text-indigo-800 p-4 rounded-lg shadow-md my-8" role="alert">
-                        <p class="font-bold">עדכון (18/04):</p>
-                        <p>אימון שני בוצע בהצלחה! שבירת שיאים מטורפת בהאק סקוואט, לחיצות חזה ופולי עליון. תרגילים חדשים התווספו למעקב. ממשיכים בכל הכוח!</p>
+                        <p class="font-bold">עדכון (20/04):</p>
+                        <p>אימון חמישי בוצע בהצלחה! התווספו שיאים חדשים בהאק סקוואט ולחיצת חזה, ותרגילים חדשים (טי-בר, פשיטות ברכיים) הוכנסו למעקב. ממשיכים לצמוח! 💪</p>
                     </div>
 
                     <!-- User Details -->
@@ -126,7 +126,7 @@
                                 <h3 class="text-xl font-bold text-gray-900 mb-4">לחיצת חזה (סמית')</h3>
                                 <div class="flex justify-between items-center mb-4 text-blue-600">
                                     <span class="font-bold">משקל עבודה נוכחי</span>
-                                    <span class="font-bold text-lg">17.5 ק"ג x 6 <span class="text-xs text-gray-500">(כל צד)</span></span>
+                                    <span class="font-bold text-lg">17.5 ק"ג x 7 <span class="text-xs text-gray-500">(כל צד)</span></span>
                                 </div>
                                 <div class="w-full h-40">
                                     <canvas id="miniChart-smithBench"></canvas>
@@ -137,7 +137,7 @@
                                 <h3 class="text-xl font-bold text-gray-900 mb-4">האק סקוואט</h3>
                                 <div class="flex justify-between items-center mb-4 text-blue-600">
                                     <span class="font-bold">משקל עבודה נוכחי</span>
-                                    <span class="font-bold text-lg">60 ק"ג x 6</span>
+                                    <span class="font-bold text-lg">60 ק"ג x 8</span>
                                 </div>
                                 <div class="w-full h-40">
                                     <canvas id="miniChart-hackSquat"></canvas>
@@ -225,7 +225,9 @@
             assistedDips: 'מקבילים (מכונה/גרביטון)',
             seatedLateralRaises: 'הרחקות כתפיים בישיבה',
             wideRow: 'חתירה רחבה',
+            tBarRow: 'טי-בר (T-Bar)',
             lyingLegCurl: 'כפיפת ברכיים (שכיבה)',
+            legExtensions: 'פשיטת ברכיים (מכונה)',
             hackSquat: 'האק סקוואט',
             standingBicepCurl: 'כפיפת מרפקים בעמידה',
             inclineCrunches: 'כפיפות בטן בשיפוע'
@@ -234,17 +236,20 @@
         const rawProgressData = {
             smithBenchPress: [
                 { weight: 15, reps: 6, date: "04/08/2026", note: "כל צד" },
-                { weight: 17.5, reps: 6, date: "18/04/2026", note: "כל צד" }
+                { weight: 17.5, reps: 6, date: "18/04/2026", note: "כל צד" },
+                { weight: 17.5, reps: 7, date: "20/04/2026", note: "כל צד" }
             ],
             smithBehindNeckPress: [
-                { weight: 8.75, reps: 6, date: "18/04/2026", note: "כל צד" }
+                { weight: 8.75, reps: 6, date: "18/04/2026", note: "כל צד" },
+                { weight: 10, reps: 5, date: "20/04/2026", note: "כל צד" }
             ],
             machinePulldown: [
                 { weight: 30, reps: 6, date: "04/08/2026", note: "כל צד" },
                 { weight: 32.5, reps: 6, date: "18/04/2026", note: "כל צד" }
             ],
             assistedDips: [
-                { weight: -42, reps: 5, date: "18/04/2026" }
+                { weight: -42, reps: 5, date: "18/04/2026" },
+                { weight: -35, reps: 4, date: "20/04/2026" }
             ],
             seatedLateralRaises: [
                 { weight: 5, reps: 8, date: "04/08/2026" }
@@ -253,13 +258,20 @@
                 { weight: 25, reps: 6, date: "04/08/2026", note: "כל צד" },
                 { weight: 22.5, reps: 9, date: "18/04/2026", note: "כל צד" }
             ],
+            tBarRow: [
+                { weight: 20, reps: 8, date: "20/04/2026" }
+            ],
             lyingLegCurl: [
                 { weight: "7 פלטות", reps: 8, date: "04/08/2026" },
                 { weight: "8 פלטות", reps: 9, date: "18/04/2026" }
             ],
+            legExtensions: [
+                { weight: 45, reps: 6, date: "20/04/2026" }
+            ],
             hackSquat: [
                 { weight: 50, reps: 8, date: "04/08/2026" },
-                { weight: 60, reps: 6, date: "18/04/2026" }
+                { weight: 60, reps: 6, date: "18/04/2026" },
+                { weight: 60, reps: 8, date: "20/04/2026" }
             ],
             standingBicepCurl: [
                 { weight: 15, reps: 8, date: "04/08/2026" }
@@ -456,7 +468,3 @@
     </script>
 </body>
 </html>
-
-
-```
-
