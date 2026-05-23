@@ -95,8 +95,8 @@
                     </div>
 
                      <div class="bg-indigo-100 border-r-4 border-indigo-500 text-indigo-800 p-4 rounded-lg shadow-md my-8" role="alert">
-                        <p class="font-bold">עדכון (14/05):</p>
-                        <p>התקדמות אדירה! שיאים חדשים בפולי עליון (מכונה), מקבילים, טיבר, הרחקות בישיבה, לחיצת רגליים, כפיפה בשכיבה, כפיפות בטן בשיפוע, והאק סקוואט. ממשיכים להפציץ! 💪</p>
+                        <p class="font-bold">עדכון (23/05):</p>
+                        <p>התקדמות אדירה! שיאים חדשים בלחיצת כתפיים, חתירה צרה, פשיטת ברכיים ומקבילים. ממשיכים להפציץ! 💪</p>
                     </div>
 
                     <!-- User Details -->
@@ -225,6 +225,7 @@
             assistedDips: 'מקבילים (מכונה/גרביטון)',
             seatedLateralRaises: 'הרחקות כתפיים בישיבה',
             wideRow: 'חתירה רחבה',
+            narrowRow: 'חתירה צרה (פולי)',
             tBarRow: 'טי-בר (T-Bar)',
             lyingLegCurl: 'כפיפת ברכיים (שכיבה)',
             legExtensions: 'פשיטת ברכיים (מכונה)',
@@ -243,53 +244,59 @@
             smithBehindNeckPress: [
                 { weight: 8.75, reps: 6, date: "18/04/2026", note: "כל צד" },
                 { weight: 10, reps: 5, date: "20/04/2026", note: "כל צד" },
-                { weight: 10, reps: 7, date: "10/05/2026", note: "כל צד" }
+                { weight: 10, reps: 7, date: "10/05/2026", note: "כל צד" },
+                { weight: 10, reps: 8, date: "23/05/2026", note: "כל צד" } // New record
             ],
             machinePulldown: [
                 { weight: 30, reps: 6, date: "04/08/2026", note: "כל צד" },
                 { weight: 32.5, reps: 6, date: "18/04/2026", note: "כל צד" },
-                { weight: 35, reps: 6, date: "14/05/2026", note: "כל צד" } // New record
+                { weight: 35, reps: 6, date: "14/05/2026", note: "כל צד" } 
             ],
             assistedDips: [
                 { weight: -42, reps: 5, date: "18/04/2026" },
                 { weight: -35, reps: 4, date: "20/04/2026" },
                 { weight: -28, reps: 4, date: "10/05/2026" },
-                { weight: -28, reps: 6, date: "14/05/2026" } // New record
+                { weight: -28, reps: 6, date: "14/05/2026" },
+                { weight: -28, reps: 7, date: "23/05/2026" } // New record
             ],
             seatedLateralRaises: [
                 { weight: 5, reps: 8, date: "04/08/2026" },
                 { weight: 5, reps: 8, date: "10/05/2026" },
-                { weight: 5, reps: 10, date: "14/05/2026" } // New record
+                { weight: 5, reps: 10, date: "14/05/2026" } 
             ],
             wideRow: [
                 { weight: 25, reps: 6, date: "04/08/2026", note: "כל צד" },
                 { weight: 22.5, reps: 9, date: "18/04/2026", note: "כל צד" },
                 { weight: 25, reps: 8, date: "10/05/2026", note: "כל צד" }
             ],
+            narrowRow: [ // Added missing exercise data array
+                 { weight: 30, reps: 8, date: "23/05/2026" } // New record
+            ],
             tBarRow: [
                 { weight: 20, reps: 8, date: "20/04/2026" },
                 { weight: 22.5, reps: 6, date: "10/05/2026" },
-                { weight: 25, reps: 7, date: "14/05/2026" } // New record
+                { weight: 25, reps: 7, date: "14/05/2026" } 
             ],
             lyingLegCurl: [
                 { weight: "7 פלטות", reps: 8, date: "04/08/2026" },
                 { weight: "8 פלטות", reps: 9, date: "18/04/2026" },
                 { weight: "9 פלטות", reps: 7, date: "10/05/2026" },
-                { weight: "10 פלטות", reps: 5, date: "14/05/2026" } // New record
+                { weight: "10 פלטות", reps: 5, date: "14/05/2026" } 
             ],
             legExtensions: [
-                { weight: 45, reps: 6, date: "20/04/2026" }
+                { weight: 45, reps: 6, date: "20/04/2026" },
+                { weight: 50, reps: 6, date: "23/05/2026" } // New record
             ],
             hackSquat: [
                 { weight: 50, reps: 8, date: "04/08/2026" },
                 { weight: 60, reps: 6, date: "18/04/2026" },
                 { weight: 60, reps: 8, date: "20/04/2026" },
                 { weight: 75, reps: 5, date: "10/05/2026" },
-                { weight: 80, reps: 5, date: "14/05/2026" } // New record
+                { weight: 80, reps: 5, date: "14/05/2026" } 
             ],
             legPress: [
                 { weight: 80, reps: 8, date: "10/05/2026" },
-                { weight: 90, reps: 9, date: "14/05/2026" } // New record
+                { weight: 90, reps: 9, date: "14/05/2026" } 
             ],
             standingBicepCurl: [
                 { weight: 15, reps: 8, date: "04/08/2026" }
@@ -297,7 +304,7 @@
             inclineCrunches: [
                 { weight: "משקל גוף", reps: 5, date: "04/08/2026" },
                 { weight: "משקל גוף", reps: 10, date: "18/04/2026" },
-                { weight: "משקל גוף", reps: 6, date: "14/05/2026" } // New record
+                { weight: "משקל גוף", reps: 6, date: "14/05/2026" } 
             ]
         };
         
